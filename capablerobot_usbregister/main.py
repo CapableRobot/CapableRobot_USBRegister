@@ -103,7 +103,7 @@ def wdi(args):
         print("WARN : space detected in the unpacking folder")
 
     cmd = [exe_path] + [str(arg) for arg in args]
-    results = subprocess.run(cmd, capture_output=True)
+    results = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     logging.debug("CMD {}".format(" ".join(cmd)))
     logging.debug("WDI exit code {}".format(results.returncode))
