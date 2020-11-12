@@ -68,6 +68,12 @@ def get_tree_size(start_path):
 def wdi(args):
     this_dir = os.path.dirname(os.path.abspath(__file__))
     arch = platform.architecture()[0]
+
+    ## platform.architecture() returns information on the python EXE
+    ## But, 32-bit python on 64-bit Windows should actually load the 64-bit DLL.
+    if arch == '32bit' and platform.machine() == 'AMD64':
+        arch = '64bit'
+
     exe_path = os.path.join(this_dir, "binaries", "wdi-{}.exe".format(arch))
 
     if not os.path.exists(exe_path):
